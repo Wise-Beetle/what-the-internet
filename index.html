@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What the Internet!?</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body id="body">
+    <div id="hide" onclick="closeModal()">
+    </div>
+    <h1 id="name">What the Internet!?</h1>
+    <p id="hero">A collection of the internets, weirdest, wackiest, and most wonderful websites.</p>
+    <div id="filterMenu">
+      <h5 id="selectTagText">Select tag:</h5>
+      <select name="Tags" id="tagDropdown">
+        <option value="All" select>All</option>
+      </select>
+      <h5 id="selectTagText">Sort by:</h5>
+      <div id="sortByTags">
+        <button class="sort" id="shuffleSort" onclick="sortWebsites('Shuffle')" >Shuffled</button>
+        <button class="sort" id="functionSort" onclick="sortWebsites('Function')">Most Functional</button>
+        <button class="sort" id="entertainmentSort" onclick="sortWebsites('Entertainment')">Most Entertainment</button>
+        <button class="sort" id="designSort" onclick="sortWebsites('Design')">Best Designs</button>
+        <button class="sort" id="ridiculousnessSort" onclick="sortWebsites('Ridiculous')">Most Ridiculous</button>
+        <button id="random" onclick="openRandom()">RANDOM PICK!</button>
+      </div>
+
+    </div>
+    <div id="gallery">
+    </div>
+    <div id="lightbox">
+        <div id="photo">
+        </div>
+        <h2 id="title" >Title</h2>
+        <p id="description" >Description</p>
+        <div id="ratingMenu">
+          <h4><span id="rating">0.0</span>/10</h4>
+          <ul>
+            <li class="ratingblock" id="li1"></li>
+            <li class="ratingblock" id="li2"></li>
+            <li class="ratingblock" id="li3"></li>
+            <li class="ratingblock" id="li4"></li>
+            <li class="ratingblock" id="li5"></li>
+            <li class="ratingblock" id="li6"></li>
+            <li class="ratingblock" id="li7"></li>
+            <li class="ratingblock" id="li8"></li>
+            <li class="ratingblock" id="li9"></li>
+            <li class="ratingblock" id="li10"></li>
+          </ul>
+          <div id="subratings">
+            <div class="subratingBlocks">
+              <h5>Function: <br><span id="function">0.0</span>/10</h5>
+            </div>
+            <div class="subratingBlocks">
+              <h5>Entertainment: <br><span id="entertainment">0.0</span>/10</h5>
+            </div>
+            <div class="subratingBlocks">
+              <h5>Design: <br><span id="design">0.0</span>/10</h5>
+            </div>
+            <div class="subratingBlocks">
+              <h5>Ridiculousness: <br><span id="ridiculousness">0.0</span>/10</h5>
+            </div>
+          </div>
+        </div>
+        <div id="tagChipsHolder">
+
+        </div>
+      <p id="close" onclick="closeModal()">&times;</p>
+      <button id="visit">Visit site</button>
+    </div>
+
+  <form method="POST" id="form">
+    <div class="contact-intro">
+      <p class="contact-description">
+        Do you know a site that would go great here? Send it over and I might add it!
+      </p>
+      <h5 class="contact-title">Submit a site:</h5>
+    </div>
+
+    <input type="hidden" name="access_key" value="068979ef-b02e-4ca0-b72b-ab46307b77fb">
+    <input type="hidden" name="subject" value="New Contact Form Submission from Web3Forms" />
+    <input type="hidden" name="from_name" value="WhatTheInternetSubmissions" />
+
+    <!-- Custom Form Data -->
+    <label for="name" class="form-label">Your name:</label>
+    <input type="text" name="name" placeholder="Bob Coolman" required>
+
+    <label for="message" class="form-label">Website URL:</label>
+    <input name="message" required placeholder="https//:example.com"></textarea>
+
+
+    <button type="submit" id="sendButton">Send it!</button>
+
+    <div id="result"></div>
+  </form>   
+</body>
+</html>
+
+<script>
+
+let currentSortMethod = "Shuffle";
+
+//copied code, dont understand it, dont mess with it...
+function shuffle(arr) {
+  const result = [...arr];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]]; // Swap elements
+  }
+  return result;
+}
+
+window.onload = function() {
+    // Reset the form fields when the page loads
+    document.getElementById("form").reset();
+};
+
+const form = document.getElementById('form');
+const result = document.getElementById('result');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait..."
+
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = json.message;
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+});
+
+//end of copied code. phew... thats confusing
+
+let allWebsites = [
+  {
+    thumbnail: "Neal.jpg",
+    name: "Neal.fun",
+    description: "A collection of games designed by neal agarwal",
+    function: 5,
+    entertainment: 10,
+    design: 10,
+    ridiculousness: 9,
+    url: "https://neal.fun",
+    tags: ["Multi-game", "viral"],
+    screenshots: ["neal1.png", "neal2.png", "neal3.png", "neal4.png", "neal5.png"],
+    hash: "neal-fun"
+  },
+  {
+    thumbnail: "Scale Of Universe.jpg",
+    name: "The Scale of the Universe",
+    description: "A brilliantly designed comparison of the objects in our universe",
+    function: 10,
+    entertainment: 9,
+    design: 5,
+    ridiculousness: 4,
+    url: "https://scaleofuniverse.com/en",
+    tags: ["Educational", "comparison"],
+    screenshots: ["Screenshots/Scale/1.png", "Screenshots/Scale/2.png", "Screenshots/Scale/3.png"],
+    hash: "the-scale-of-the-universe"
+  },
+  {
+    thumbnail: "hot dog.jpg",
+    name: "PICTUREOFHOTDOG.COM",
+    description: "Literally exactly what you would think.",
+    function: 1,
+    entertainment: 6,
+    design: 6,
+    ridiculousness: 10,
+    url: "https://www.pictureofhotdog.com",
+    tags: ["Complete waste of time", "Funny"],
+    screenshots: ["Screenshots/Hot Dog/1.png", "Screenshots/Hot Dog/2.png", "Screenshots/Hot Dog/3.png", "Screenshots/Hot Dog/4.png"],
+    hash: "pictureofhotdog"
+  },
+  {
+    thumbnail: "Emoticons.jpg",
+    name: "Emoticon Hub",
+    description: "All the emoticons you could ever wish for",
+    function: 9,
+    entertainment: 6,
+    design: 9,
+    ridiculousness: 5,
+    url: "https://emoticonhub.com",
+    tags: ["Copy & Paste", "Emoji's"],
+    screenshots: ["Screenshots/Emoticon/1.png", "Screenshots/Emoticon/2.png", "Screenshots/Emoticon/3.png"],
+    hash: "emoticon-hub"
+  },
+  {
+    thumbnail: "scoreboard.jpg",
+    name: "Scoreboardz",
+    description: "A minimalistic way to keep score",
+    function: 10,
+    entertainment: 4,
+    design: 10,
+    ridiculousness: 3,
+    url: "https://scoreboardz.com",
+    tags: ["Score", "Functional", "Tally"],
+    screenshots: ["Screenshots/Scoreboard/1.png", "Screenshots/Scoreboard/2.png", "Screenshots/scoreboard/3.png", "Screenshots/scoreboard/4.png"],
+    hash: "scoreboardz"
+  },
+  {
+    thumbnail: "pixel.jpg",
+    name: "Pixel Thoughts",
+    description: "A short custom meditation, that helps relive stress",
+    function: 10,
+    entertainment: 5,
+    design: 10,
+    ridiculousness: 1,
+    url: "https://www.pixelthoughts.co",
+    tags: ["Stress", "Mental Health", "Music", "Relax"],
+    screenshots: ["Screenshots/pixel/1.png", "Screenshots/pixel/2.png", "Screenshots/pixel/3.png", "Screenshots/pixel/4.png", "Screenshots/pixel/5.png", "Screenshots/pixel/6.png"],
+    hash: "pixel-thoughts"
+  },
+  {
+    thumbnail: "optical.jpg",
+    name: "Optical Toys",
+    description: "A collection of the crziest optical illusions you can find.",
+    function: 4,
+    entertainment: 10,
+    design: 9,
+    ridiculousness: 6,
+    url: "https://optical.toys",
+    tags: ["Illusion", "Mind-game", "Crazy", "Puzzle"],
+    screenshots: ["Screenshots/optical/1.png", "Screenshots/optical/2.png", "Screenshots/optical/3.png"],
+    hash: "optical-toys"
+  },
+  {
+    thumbnail: "ocean.jpg",
+    name: "Oceean Image Bank",
+    description: "A beautiful library of underwater photography",
+    function: 5,
+    entertainment: 7,
+    design: 10,
+    ridiculousness: 1,
+    url: "https://oceanimagebank.theoceanagency.org",
+    tags: ["Beautiful", "Educational", "Gallery", "Art"],
+    screenshots: ["Screenshots/ocean/1.png", "Screenshots/ocean/2.png", "Screenshots/ocean/3.png"],
+    hash: "ocean-image-bank"
+  },
+  {
+    thumbnail: "broing.jpg",
+    name: "Boring boring boring",
+    description: "Just the word boring scrolling down the screen.",
+    function: 1,
+    entertainment: 5,
+    design: 5,
+    ridiculousness: 10,
+    url: "https://boringboringboring.com",
+    tags: ["Complete waste of time", "Funny", "Simple"],
+    screenshots: ["Screenshots/boring/1.png"],
+    hash: "boring-boring-boring"
+  },
+  {
+    thumbnail: "floor.jpg",
+    name: "Floor796",
+    description: "A scrollable canvas of many animated illustrations interacting.",
+    function: 4,
+    entertainment: 8,
+    design: 9,
+    ridiculousness: 8,
+    url: "https://boringboringboring.com",
+    tags: ["Complete waste of time", "Funny", "Simple", "Art"],
+    screenshots: ["Screenshots/Floor/1.png", "Screenshots/Floor/2.png", "Screenshots/Floor/3.png"],
+    hash: "floor796"
+  },
+  {
+    thumbnail: "chad.jpg",
+    name: "Bartosz Ciechanowski",
+    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    function: 10,
+    entertainment: 7,
+    design: 9,
+    ridiculousness: 4,
+    url: "https://ciechanow.ski/archives/",
+    tags: ["Educational", "Functional", "Simple"],
+    screenshots: ["Screenshots/Bart/1.png", "Screenshots/Bart/2.png", "Screenshots/Bart/3.png", "Screenshots/Bart/4.png"],
+    hash: "bartosz-ciechanowski"
+  },
+  {
+    thumbnail: "million.jpg",
+    name: "Million Dollar Homepage",
+    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    function: 2,
+    entertainment: 5,
+    design: 3,
+    ridiculousness: 9,
+    url: "https://milliondollarhomepage.com",
+    tags: ["Funny", "Gallery"],
+    screenshots: ["Screenshots/Million/1.png", "Screenshots/Million/2.png"],
+    hash: "million-dollar-homepage"
+  },
+  {
+    thumbnail: "horg.jpg",
+    name: "H.O.R.G.",
+    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    function: 4,
+    entertainment: 9,
+    design: 6,
+    ridiculousness: 10,
+    url: "https://www.horg.com/horg/",
+    tags: ["Funny", "Educational", "Simple", "Complete waste of time"],
+    screenshots: ["Screenshots/HORG/1.png", "Screenshots/HORG/2.png", "Screenshots/HORG/3.png", "Screenshots/HORG/4.png"],
+    hash: "horg"
+  },
+  {
+    thumbnail: "million dollar art.jpg",
+    name: "The Million Dollar Artwork",
+    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    function: 3,
+    entertainment: 10,
+    design: 8,
+    ridiculousness: 9,
+    url: "https://themilliondollardrawing.com",
+    tags: ["Art", "Viral"],
+    screenshots: ["Screenshots/The Million Dollar Artwork/1.png", "Screenshots/The Million Dollar Artwork/2.png", "Screenshots/The Million Dollar Artwork/3.png"],
+    hash: "million-dollar-artwork"
+  },
+  {
+    thumbnail: "nico.jpg",
+    name: "Nicopowa",
+    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    function: 4,
+    entertainment: 6,
+    design: 10,
+    ridiculousness: 5,
+    url: "https://nicopowa.github.io/ripples3/",
+    tags: ["Beautiful", "Relax"],
+    screenshots: ["Screenshots/Nicopowa/1.png", "Screenshots/Nicopowa/2.png"],
+    hash: "nicopowa"
+  }
+]
+
+function drawTagChips(selcetedSite){
+
+  const tagChipsHolder = document.getElementById("tagChipsHolder");
+  tagChipsHolder.replaceChildren();
+  for (let i = 0; i < selcetedSite.tags.length; i++){
+    const newTag = document.createElement("p");
+    newTag.textContent = selcetedSite.tags[i];
+    newTag.className = "tagChip"
+    tagChipsHolder.append(newTag)
+  }
+  
+}
+
+let displayGallery = [];
+
+
+function getOverallRating(whatSite){
+  const overallRating = Math.round((whatSite.function + whatSite.entertainment + whatSite.design + whatSite.ridiculousness)/4)
+  return overallRating;
+}
+
+
+for (let i=0; i < allWebsites.length; i++){
+  displayGallery.push(allWebsites[i])
+}
+// let allWebsites = [nealFun, scaleOfSpace, hotDog, emoticon, scoreboard, pixelThoughts, optical]
+
+let unflatTags = [];
+
+function renderTagDropdown(){
+  unflatTags = [];
+  for (let i = 0; i < allWebsites.length; i++){
+    unflatTags.push(allWebsites[i].tags)
+  }
+  const tags = [...new Set(unflatTags.flat())]
+  const dropdown = document.getElementById("tagDropdown");
+
+  for (let i = 0; i < tags.length; i++){
+    const newTag = new Option(tags[i]);
+    dropdown.add(newTag);
+  }
+}
+renderTagDropdown();
+
+function checkTags(){
+  displayGallery = [];
+  renderThumbnails();
+  let tagDropdown = document.getElementById("tagDropdown");
+  const selectedTag = tagDropdown.value;
+  for (let i=0; i < allWebsites.length; i++){
+    if (allWebsites[i].tags.includes(selectedTag)){
+      displayGallery.push(allWebsites[i])
+    }
+    if (selectedTag == "All"){
+      displayGallery.push(allWebsites[i])
+    }
+  }
+  renderThumbnails();
+  sortWebsites(currentSortMethod)
+}
+
+const tagSelectMenu = document.getElementById("tagDropdown")
+
+tagSelectMenu.addEventListener("change", checkTags)
+
+
+
+
+// Open the Modal
+let index = 0;
+
+function renderCard(site) {
+  for (let i = 0; i < site.screenshots.length; i++){
+    const slideshow = document.getElementById('photo');
+    const screenshot = document.createElement('img');
+    slideshow.appendChild(screenshot);
+    screenshot.className = "screenshot";
+    document.getElementsByClassName("screenshot").item(i).src = ""
+    document.getElementsByClassName("screenshot").item(i).src= site.screenshots[i];
+  } 
+  document.getElementById("lightbox").style.display = "block";
+
+  document.getElementById("hide").style.display = "block";
+  document.getElementById("title").innerHTML = site.name;
+  document.getElementById("description").innerHTML = site.description;
+  document.getElementById("function").innerHTML = site.function;
+  document.getElementById("entertainment").innerHTML = site.entertainment;
+  document.getElementById("design").innerHTML = site.design;
+  document.getElementById("ridiculousness").innerHTML = site.ridiculousness;
+  document.getElementById("rating").innerHTML = getOverallRating(site);
+  history.replaceState(null, "", "#" + site.hash);
+  document.getElementById('visit').onclick = function() {
+    window.open(site.url, "_blank")
+  }
+  drawScore(getOverallRating(site));
+  drawTagChips(site)
+
+}
+function drawScore (score){
+
+  let listItems = [
+    document.getElementById("li1"),
+    document.getElementById("li2"),
+    document.getElementById("li3"),
+    document.getElementById("li4"),
+    document.getElementById("li5"),
+    document.getElementById("li6"),
+    document.getElementById("li7"),
+    document.getElementById("li8"),
+    document.getElementById("li9"),
+    document.getElementById("li10")
+  ]
+  for (let i= 0; i < listItems.length; i++){
+    listItems[i].style.backgroundColor = "lightgrey"
+  }
+  for (let i = 0; i < score; i++){
+    listItems[i].style.backgroundColor = "rgb(111, 205, 111)";
+  }
+
+}
+
+
+function renderThumbnails() {
+  document.getElementById("gallery").replaceChildren();
+  for (let i = 0; i < displayGallery.length; i++) {
+    
+
+    const thumbnail = document.createElement('img');
+    const galleryDiv = document.getElementById("gallery");
+    
+    galleryDiv.appendChild(thumbnail);
+    function clickedThumbnail() {
+      renderCard(displayGallery[i])
+    }
+    thumbnail.addEventListener('click', clickedThumbnail);
+
+    thumbnail.src = displayGallery[i].thumbnail;
+    thumbnail.alt = displayGallery[i].name;
+    thumbnail.className = "link"; 
+  }
+}
+
+function openRandom(){
+  let arrayLength = displayGallery.length;
+  let randomIndex = Math.floor(Math.random() * arrayLength);
+  renderCard(displayGallery[randomIndex]);
+}
+
+renderThumbnails();
+
+// Close the Modal
+function closeModal() {
+  document.getElementById("lightbox").scrollTo(0,0);
+  document.getElementById("photo").scrollTo(0,0);
+  document.getElementById("lightbox").style.display = "none";
+  document.getElementById("hide").style.display = "none";
+  window.location.hash = ""
+  const gallery = document.getElementById("photo");
+  gallery.replaceChildren();
+
+
+}
+
+function sortWebsites(sortMethod) {
+  if (sortMethod == "Shuffle") {
+    console.log(shuffle(displayGallery))
+    displayGallery = shuffle(displayGallery);
+    renderThumbnails();
+    currentSortMethod = "Shuffle";
+    let sortButtons = document.getElementsByClassName("sort");
+    for (let i = 0; i < sortButtons.length; i++) {
+      sortButtons[i].style.backgroundColor = "lightgrey"
+      sortButtons[i].style.color = "black"
+    }
+    document.getElementById("shuffleSort").style.backgroundColor = "rgb(172, 94, 142)"
+    document.getElementById("shuffleSort").style.color = "white";
+  }
+  if (sortMethod == "Function"){
+    displayGallery.sort((a, b) => b.function - a.function);
+    renderThumbnails();
+    currentSortMethod = "Function";
+    let sortButtons = document.getElementsByClassName("sort");
+    for (let i = 0; i < sortButtons.length; i++) {
+      sortButtons[i].style.backgroundColor = "lightgrey"
+      sortButtons[i].style.color = "black"
+    }
+    document.getElementById("functionSort").style.backgroundColor = "rgb(172, 94, 142)"
+    document.getElementById("functionSort").style.color = "white";
+  }
+  if (sortMethod == "Entertainment") {
+    displayGallery.sort((a, b) => b.entertainment - a.entertainment);
+    renderThumbnails();
+    currentSortMethod = "Entertainment";
+
+    let sortButtons = document.getElementsByClassName("sort");
+    for (let i = 0; i < sortButtons.length; i++) {
+      sortButtons[i].style.backgroundColor = "lightgrey"
+      sortButtons[i].style.color = "black"
+    }
+    document.getElementById("entertainmentSort").style.backgroundColor = "rgb(172, 94, 142)"
+    document.getElementById("entertainmentSort").style.color = "white";
+  }
+  if (sortMethod == "Design") {
+    displayGallery.sort((a, b) => b.design - a.design);
+    renderThumbnails();
+    currentSortMethod = "Design";
+    let sortButtons = document.getElementsByClassName("sort");
+    for (let i = 0; i < sortButtons.length; i++) {
+      sortButtons[i].style.backgroundColor = "lightgrey"
+      sortButtons[i].style.color = "black"      
+    }
+    document.getElementById("designSort").style.backgroundColor = "rgb(172, 94, 142)"
+    document.getElementById("designSort").style.color = "white";
+  }
+  if (sortMethod == "Ridiculous") {
+    displayGallery.sort((a, b) => b.ridiculousness - a.ridiculousness);
+    renderThumbnails();
+    currentSortMethod = "Ridiculous";
+    let sortButtons = document.getElementsByClassName("sort");
+    for (let i = 0; i < sortButtons.length; i++) {
+      sortButtons[i].style.backgroundColor = "lightgrey"
+      sortButtons[i].style.color = "black"      
+    }
+    document.getElementById("ridiculousnessSort").style.backgroundColor = "rgb(172, 94, 142)";
+    document.getElementById("ridiculousnessSort").style.color = "white";
+    
+  }
+}
+
+window.addEventListener("load", handleRoute);
+window.addEventListener("hashchange", handleRoute);
+
+function handleRoute() {
+  const hash = window.location.hash.replace("#", "");
+
+  const site = allWebsites.find(s => s.hash === hash);
+
+  if (site) {
+    renderCard(site);
+  }
+}
+</script>

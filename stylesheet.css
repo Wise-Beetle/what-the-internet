@@ -1,0 +1,325 @@
+#lightbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 60%;
+    height: 80%;
+
+    display: none;
+    z-index: 2;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 50px;
+
+}
+
+#hide{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+
+    opacity: .2;
+    z-index: 1;
+    display: none;
+    inset: 0;
+    backdrop-filter: blur(5px);
+}
+body{
+    margin: 0;
+    padding: 30px;
+}
+.link{
+    width: 230px;
+    height: 115px;
+    border-radius: 20px;
+    border: 2px solid black;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+.link:hover{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    transform: translate(4px, 4px);
+}
+.cartoon-button:active {
+  transform: translate(8px, 8px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+#photo{
+
+    width: 100%;
+    height: 40%;
+    background-color: lightgrey;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px;
+}
+.screenshot{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+
+    top: 50%;
+    bottom: 50%;
+    height: 90%;
+    object-fit: contain;
+    display: inline-block;
+    border-radius: 20px;
+}
+#close{
+    margin-top: 5px;
+    margin-right: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: palevioletred;
+
+    border: 2px solid rgb(40, 21, 27);
+
+    border-radius: 50px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+
+    color: rgb(40, 21, 27);
+    cursor: pointer;
+
+}
+#title{
+    margin: 20px;
+    margin-left: 40px;
+}
+#description{
+    margin-left: 40px;
+
+}
+#visit{
+    position: absolute;
+    cursor: pointer;
+    background-color: rgb(172, 94, 142);
+    width: 150px;
+    height: 80px;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 20px;
+    top: 50%;
+    bottom: 50%;
+    right: 35px;
+    transition: background-color 0.2s ease;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: large;
+}
+#visit:hover{
+    background-color: rgb(128, 70, 106);
+}
+#ratingMenu {
+    width: 90%;
+    padding: 20px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+h1{
+    font-family: "Agbalumo", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 75px; 
+}
+h2{
+    font-family: "Agbalumo", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 60px;
+}
+#name{
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#gallery{
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+p{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.ratingblock{
+    width: 300px;
+    height: 20px;
+    background-color: lightgray;
+    border-radius: 20px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+}
+ul{
+    width: 90%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    gap: 5px;
+}
+h4{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: larger;
+    width: 40px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+
+}
+h5 {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: large;
+}
+#subratings{
+    text-align: center;
+    width: 100%;
+}
+.subratingBlocks{
+    background-color: rgba(211, 211, 211, 0.497);
+    width: 350px;
+    padding: 20px;
+    display: inline-block;
+    height: 100px;
+    margin: 0;
+    margin-top: 20px;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+.tagChip{
+    background-color: rgb(172, 94, 142);
+    width: auto;
+    padding: 20px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-left: 20px;
+    color: white;
+}
+#tagDropdown{
+    padding: 20px;
+    margin: 10px;
+    background-color: rgb(172, 94, 142);
+    color: white;
+    border-radius: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: medium;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    
+}
+#filterMenu{
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+}
+#selectTagText{
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+    display: inline-block;
+}
+#sortByTags{
+    display: inline-flex;
+
+}
+.sort{
+    display: inline-block;
+    width: auto;
+    padding: 20px;
+
+    padding: 20px;
+    margin: 10px;
+    background-color: lightgray;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: medium;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+#random{
+    border-radius: 20px;
+    margin: 20px;
+    border: none;
+    background-color: rgb(111, 205, 111);
+    padding: 20px;
+    cursor: pointer;
+}
+#random:hover{
+    background-color: rgb(89, 165, 89);
+}
+#hero{
+    text-align: center;
+}
+#form{
+    display: flexbox;
+    margin-top: 30px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+.contact-title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.form-label{
+    display: inline;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: medium;
+}
+#sendButton{
+    background-color: rgb(172, 94, 142);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+}
+#sendButton:hover{
+    background-color: rgb(128, 70, 106);
+}
