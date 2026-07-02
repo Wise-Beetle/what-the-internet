@@ -6,13 +6,19 @@
     background-color: white;
     width: 60%;
     height: 80%;
+    padding: 20px;
 
     display: none;
     z-index: 2;
-    overflow-y: auto;
     overflow-x: hidden;
-    border-radius: 50px;
+    overflow-y: auto;
 
+    border-radius: 20px;
+
+}
+#lightbox * {
+  box-sizing: border-box; /* Includes padding/borders in the element's width */
+  max-width: 100%;        /* Forces elements to shrink to fit the lightbox */
 }
 
 #hide{
@@ -58,6 +64,7 @@ body{
     overflow-x: auto;
     white-space: nowrap;
     padding: 20px;
+    border-radius: 20px;
 }
 .screenshot{
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
@@ -122,7 +129,7 @@ body{
     background-color: rgb(128, 70, 106);
 }
 #ratingMenu {
-    width: 90%;
+    width: auto;
     padding: 20px;
     height: auto;
     border-radius: 20px;
@@ -204,17 +211,21 @@ h5 {
 #subratings{
     text-align: center;
     width: 100%;
+    align-items: center;
 }
 .subratingBlocks{
+    
     background-color: rgba(211, 211, 211, 0.497);
     width: 350px;
     padding: 20px;
-    display: inline-block;
+    display: inline-flex;
     height: 100px;
     margin: 0;
     margin-top: 20px;
     margin-right: 10px;
     border-radius: 20px;
+    align-items: center;
+    justify-content: center;
 }
 .tagChip{
     background-color: rgb(172, 94, 142);
@@ -325,6 +336,16 @@ h5 {
 #sendButton:hover{
     background-color: rgb(128, 70, 106);
 }
+#featuredSite{
+    display: flexbox;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+
+}
 
 @media (max-width: 1000px) {
     h1 {font-size: xx-large;}
@@ -338,4 +359,43 @@ h5 {
         width: 100%;           /* Stretches the buttons to fill the mobile width */
         margin: 0;             /* Resets old desktop margins that might skew alignment */
     }
+    #visit {
+        position: static;
+        display: block;
+        width: 100%;
+        padding: 20px;
+        margin: 20px 0;
+        box-sizing: border-box;
+    }
+    #title{
+        font-size: large;
+        text-align: center;
+    }
+
+}
+.featuredLink{
+    width: 230px;
+    height: 115px;
+    border-radius: 20px;
+    border: 4px solid goldenrod;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0px 0 5px 5px rgba(218, 165, 32, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+.featuredLink:hover{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    transform: translate(4px, 4px);
+}
+#featuredSite{
+    display: flex;
+    align-items: center;
+}
+h3{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: large;
 }

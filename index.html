@@ -16,6 +16,8 @@
   <meta property="og:image" content="preview.png">
 </head>
 <body id="body">
+
+
     <div id="hide" onclick="closeModal()">
     </div>
     <h1 id="name">What the Internet!?</h1>
@@ -34,6 +36,17 @@
         <button class="sort" id="ridiculousnessSort" onclick="sortWebsites('Ridiculous')">Most Ridiculous</button>
         <button id="random" onclick="openRandom()">RANDOM PICK!</button>
       </div>
+    </div>
+    <div id="featuredSite">
+      <div>
+        <h3>Best site of July...</h3>
+        <p>Slowroads!</p>
+        <p>When I first found this site, I started playing it and it was surprisingly a lot of fun! I think this is a very good first featured site. The demo for the site is also available on steam for free.</p>
+        <p style="font-size: smaller;"><i>Remember! If you have a site you think would be good for august, submit it in the form below. Nominations will take place the last week of July.</i></p>
+      </div>
+      <div id="featuredSiteLink">
+      </div>
+
 
     </div>
     <div id="gallery">
@@ -43,6 +56,7 @@
         </div>
         <h2 id="title" >Title</h2>
         <p id="description" >Description</p>
+        <button id="visit">Visit site</button>
         <div id="ratingMenu">
           <h4><span id="rating">0.0</span>/10</h4>
           <ul>
@@ -76,7 +90,6 @@
 
         </div>
       <p id="close" onclick="closeModal()">&times;</p>
-      <button id="visit">Visit site</button>
     </div>
 
   <form method="POST" id="form">
@@ -179,7 +192,8 @@ let allWebsites = [
     url: "https://neal.fun",
     tags: ["Multi-game", "viral"],
     screenshots: ["neal1.png", "neal2.png", "neal3.png", "neal4.png", "neal5.png"],
-    hash: "neal-fun"
+    hash: "neal-fun",
+    featured: false
   },
   {
     thumbnail: "Scale Of Universe.jpg",
@@ -192,7 +206,8 @@ let allWebsites = [
     url: "https://scaleofuniverse.com/en",
     tags: ["Educational", "comparison"],
     screenshots: ["Screenshots/Scale/1.png", "Screenshots/Scale/2.png", "Screenshots/Scale/3.png"],
-    hash: "the-scale-of-the-universe"
+    hash: "the-scale-of-the-universe",
+    featured: false
   },
   {
     thumbnail: "hot dog.jpg",
@@ -205,7 +220,8 @@ let allWebsites = [
     url: "https://www.pictureofhotdog.com",
     tags: ["Complete waste of time", "Funny"],
     screenshots: ["Screenshots/Hot Dog/1.png", "Screenshots/Hot Dog/2.png", "Screenshots/Hot Dog/3.png", "Screenshots/Hot Dog/4.png"],
-    hash: "pictureofhotdog"
+    hash: "pictureofhotdog",
+    featured: false
   },
   {
     thumbnail: "Emoticons.jpg",
@@ -218,7 +234,8 @@ let allWebsites = [
     url: "https://emoticonhub.com",
     tags: ["Copy & Paste", "Emoji's"],
     screenshots: ["Screenshots/Emoticon/1.png", "Screenshots/Emoticon/2.png", "Screenshots/Emoticon/3.png"],
-    hash: "emoticon-hub"
+    hash: "emoticon-hub",
+    featured: false
   },
   {
     thumbnail: "scoreboard.jpg",
@@ -231,7 +248,8 @@ let allWebsites = [
     url: "https://scoreboardz.com",
     tags: ["Score", "Functional", "Tally"],
     screenshots: ["Screenshots/Scoreboard/1.png", "Screenshots/Scoreboard/2.png", "Screenshots/scoreboard/3.png", "Screenshots/scoreboard/4.png"],
-    hash: "scoreboardz"
+    hash: "scoreboardz",
+    featured: false
   },
   {
     thumbnail: "pixel.jpg",
@@ -244,7 +262,8 @@ let allWebsites = [
     url: "https://www.pixelthoughts.co",
     tags: ["Stress", "Mental Health", "Music", "Relax"],
     screenshots: ["Screenshots/pixel/1.png", "Screenshots/pixel/2.png", "Screenshots/pixel/3.png", "Screenshots/pixel/4.png", "Screenshots/pixel/5.png", "Screenshots/pixel/6.png"],
-    hash: "pixel-thoughts"
+    hash: "pixel-thoughts",
+    featured: false
   },
   {
     thumbnail: "optical.jpg",
@@ -257,7 +276,8 @@ let allWebsites = [
     url: "https://optical.toys",
     tags: ["Illusion", "Mind-game", "Crazy", "Puzzle"],
     screenshots: ["Screenshots/optical/1.png", "Screenshots/optical/2.png", "Screenshots/optical/3.png"],
-    hash: "optical-toys"
+    hash: "optical-toys",
+    featured: false
   },
   {
     thumbnail: "ocean.jpg",
@@ -270,7 +290,8 @@ let allWebsites = [
     url: "https://oceanimagebank.theoceanagency.org",
     tags: ["Beautiful", "Educational", "Gallery", "Art"],
     screenshots: ["Screenshots/ocean/1.png", "Screenshots/ocean/2.png", "Screenshots/ocean/3.png"],
-    hash: "ocean-image-bank"
+    hash: "ocean-image-bank",
+    featured: false
   },
   {
     thumbnail: "broing.jpg",
@@ -283,7 +304,8 @@ let allWebsites = [
     url: "https://boringboringboring.com",
     tags: ["Complete waste of time", "Funny", "Simple"],
     screenshots: ["Screenshots/boring/1.png"],
-    hash: "boring-boring-boring"
+    hash: "boring-boring-boring",
+    featured: false
   },
   {
     thumbnail: "floor.jpg",
@@ -296,7 +318,8 @@ let allWebsites = [
     url: "https://boringboringboring.com",
     tags: ["Complete waste of time", "Funny", "Simple", "Art"],
     screenshots: ["Screenshots/Floor/1.png", "Screenshots/Floor/2.png", "Screenshots/Floor/3.png"],
-    hash: "floor796"
+    hash: "floor796",
+    featured: false
   },
   {
     thumbnail: "chad.jpg",
@@ -309,12 +332,13 @@ let allWebsites = [
     url: "https://ciechanow.ski/archives/",
     tags: ["Educational", "Functional", "Simple"],
     screenshots: ["Screenshots/Bart/1.png", "Screenshots/Bart/2.png", "Screenshots/Bart/3.png", "Screenshots/Bart/4.png"],
-    hash: "bartosz-ciechanowski"
+    hash: "bartosz-ciechanowski",
+    featured: false
   },
   {
     thumbnail: "million.jpg",
     name: "Million Dollar Homepage",
-    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    description: "A place where you could buy one pixel of a homepage for $1. (now sold out)",
     function: 2,
     entertainment: 5,
     design: 3,
@@ -322,12 +346,13 @@ let allWebsites = [
     url: "https://milliondollarhomepage.com",
     tags: ["Funny", "Gallery"],
     screenshots: ["Screenshots/Million/1.png", "Screenshots/Million/2.png"],
-    hash: "million-dollar-homepage"
+    hash: "million-dollar-homepage",
+    featured: false
   },
   {
     thumbnail: "horg.jpg",
     name: "H.O.R.G.",
-    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    description: "An introduction into the fasinating study of occlupanids and all of their counter parts.",
     function: 4,
     entertainment: 9,
     design: 6,
@@ -335,12 +360,13 @@ let allWebsites = [
     url: "https://www.horg.com/horg/",
     tags: ["Funny", "Educational", "Simple", "Complete waste of time"],
     screenshots: ["Screenshots/HORG/1.png", "Screenshots/HORG/2.png", "Screenshots/HORG/3.png", "Screenshots/HORG/4.png"],
-    hash: "horg"
+    hash: "horg",
+    featured: false
   },
   {
     thumbnail: "million dollar art.jpg",
     name: "The Million Dollar Artwork",
-    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    description: "You pay $1 to put a pixel on a canvas of one million pixels",
     function: 3,
     entertainment: 10,
     design: 8,
@@ -348,12 +374,13 @@ let allWebsites = [
     url: "https://themilliondollardrawing.com",
     tags: ["Art", "Viral"],
     screenshots: ["Screenshots/The Million Dollar Artwork/1.png", "Screenshots/The Million Dollar Artwork/2.png", "Screenshots/The Million Dollar Artwork/3.png"],
-    hash: "million-dollar-artwork"
+    hash: "million-dollar-artwork",
+    featured: false
   },
   {
     thumbnail: "nico.jpg",
     name: "Nicopowa",
-    description: "A intricately designed site that explains complex topics using interactive diagrams and models.",
+    description: "A fluid simulation that cretes ripples in a pool of water when you click.",
     function: 4,
     entertainment: 6,
     design: 10,
@@ -361,7 +388,50 @@ let allWebsites = [
     url: "https://nicopowa.github.io/ripples3/",
     tags: ["Beautiful", "Relax"],
     screenshots: ["Screenshots/Nicopowa/1.png", "Screenshots/Nicopowa/2.png"],
-    hash: "nicopowa"
+    hash: "nicopowa",
+    featured: false
+  },
+  {
+    thumbnail: "The free movie.jpg",
+    name: "The FREE Movie",
+    description: "The finished result of 1000's of people drawing a movie one frame at a time.",
+    function: 4,
+    entertainment: 9,
+    design: 5,
+    ridiculousness: 9,
+    url: "https://thefreemovie.buzz",
+    tags: ["Funny", "Art"],
+    screenshots: ["Screenshots/The Free Movie/1.png", "Screenshots/The Free Movie/2.png", "Screenshots/The Free Movie/3.png"],
+    hash: "the-free-movie",
+    featured: false
+  },
+  {
+    thumbnail: "igloo.jpg",
+    name: "IGLOO",
+    description: "A very over the top buisness portfolio.",
+    function: 6,
+    entertainment: 7,
+    design: 10,
+    ridiculousness: 5,
+    url: "https://www.igloo.inc",
+    tags: ["Beautiful", "Art", "Gallery"],
+    screenshots: ["Screenshots/Igloo/1.png", "Screenshots/Igloo/2.png", "Screenshots/Igloo/3.png"],
+    hash: "igloo ",
+    featured: false
+  },
+  {
+    thumbnail: "slowroads.jpg",
+    name: "Slow Roads",
+    description: "A beautifully designed driving simulator that you can play right in your browser",
+    function: 6,
+    entertainment: 10,
+    design: 8,
+    ridiculousness: 5,
+    url: "https://www.igloo.inc",
+    tags: ["Beautiful", "Art", "Gallery"],
+    screenshots: ["Screenshots/Slow Roads/1.png", "Screenshots/Slow Roads/2.png", "Screenshots/Slow Roads/3.png", "Screenshots/Slow Roads/4.png"],
+    hash: "slow-roads",
+    featured: true
   }
 ]
 
@@ -376,6 +446,24 @@ function drawTagChips(selcetedSite){
     tagChipsHolder.append(newTag)
   }
   
+}
+
+function drawFeaturedSite (featuredSite)
+{
+  document.getElementById("featuredSiteLink").replaceChildren();  
+  const thumbnail = document.createElement('img');
+  const galleryDiv = document.getElementById("featuredSiteLink");
+  
+  galleryDiv.appendChild(thumbnail);
+  function clickedThumbnail() {
+    renderCard(displayGallery[featuredSite])
+  }
+  thumbnail.addEventListener('click', clickedThumbnail);
+
+  thumbnail.src = displayGallery[featuredSite].thumbnail;
+  thumbnail.alt = displayGallery[featuredSite].name;
+  thumbnail.className = "featuredLink"; 
+
 }
 
 let displayGallery = [];
@@ -488,6 +576,7 @@ function drawScore (score){
 
 
 function renderThumbnails() {
+  drawFeaturedSite(displayGallery.findIndex(user => user.name === "Slow Roads"))
   document.getElementById("gallery").replaceChildren();
   for (let i = 0; i < displayGallery.length; i++) {
     
@@ -503,7 +592,13 @@ function renderThumbnails() {
 
     thumbnail.src = displayGallery[i].thumbnail;
     thumbnail.alt = displayGallery[i].name;
-    thumbnail.className = "link"; 
+
+    if(displayGallery[i].featured)
+    {
+      thumbnail.className = "featuredLink";
+    } else{
+      thumbnail.className = "link"; 
+    }
   }
 }
 
