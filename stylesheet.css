@@ -155,6 +155,7 @@ h2{
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
 }
 
 p{
@@ -254,7 +255,7 @@ h5 {
     margin: 0;
     margin-left: 10px;
     padding: 0;
-    display: inline-block;
+    display: inline;
 }
 #sortByTags{
     display: inline-flex;
@@ -263,6 +264,7 @@ h5 {
 .sort{
     display: inline-block;
     width: auto;
+
     padding: 20px;
 
     padding: 20px;
@@ -322,4 +324,18 @@ h5 {
 }
 #sendButton:hover{
     background-color: rgb(128, 70, 106);
+}
+
+@media (max-width: 1000px) {
+    h1 {font-size: xx-large;}
+    #sortByTags {
+        display: flex;         /* Switches container from horizontal to flex layout */
+        flex-direction: column; /* Force-stacks all child buttons vertically */
+        gap: 10px;             /* Adds clean, reliable mobile spacing between buttons */
+    }
+    
+    .sort {
+        width: 100%;           /* Stretches the buttons to fill the mobile width */
+        margin: 0;             /* Resets old desktop margins that might skew alignment */
+    }
 }
