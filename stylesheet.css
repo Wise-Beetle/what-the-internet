@@ -371,6 +371,9 @@ h5 {
         font-size: large;
         text-align: center;
     }
+    #featuredSite{
+        flex-direction: column;
+    }
 
 }
 .featuredLink{
