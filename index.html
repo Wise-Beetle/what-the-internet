@@ -461,7 +461,35 @@ let allWebsites = [
     screenshots: ["Screenshots/Alchemist/1.png", "Screenshots/Alchemist/2.png"],
     hash: "the-alchemists-logbook",
     featured: false
-  }
+  },
+  {
+    thumbnail: "quick.jpg",
+    name: "Quick, draw!",
+    description: "A Google labs experiment, you draw different objects in a short time ",
+    function: 4,
+    entertainment: 9,
+    design: 8,
+    ridiculousness: 7,
+    url: "https://quickdraw.withgoogle.com/",
+    tags: ["Art", "Simple", "Complete waste of time", "Funny"],
+    screenshots: ["Screenshots/Quick Draw/1.png", "Screenshots/Quick Draw/2.png", "Screenshots/Quick Draw/3.png", "Screenshots/Quick Draw/4.png"],
+    hash: "quick-draw",
+    featured: false
+  },
+  {
+    thumbnail: "idea.jpg",
+    name: "Idea games",
+    description: "My favorite site like Neal.fun, A gallery of funny internet games",
+    function: 3,
+    entertainment: 10,
+    design: 9,
+    ridiculousness: 8,
+    url: "https://www.ideagames.fun",
+    tags: ["Simple", "Complete waste of time", "Funny", "Gallery"],
+    screenshots: ["Screenshots/Idea Games/1.png", "Screenshots/Idea Games/2.png", "Screenshots/Idea Games/3.png"],
+    hash: "quick-draw",
+    featured: false
+  }  
 ]
 
 function drawTagChips(selcetedSite){
@@ -648,8 +676,6 @@ function closeModal() {
   window.location.hash = ""
   const gallery = document.getElementById("photo");
   gallery.replaceChildren();
-
-
 }
 
 function sortWebsites(sortMethod) {
